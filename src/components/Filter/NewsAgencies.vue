@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="mx-auto">
     <v-list dense nav v-if="type == 'list'">
-      <v-list-item v-for="item in items" :key="item.title" link>
+      <v-list-item v-for="(item, index) in items" :key="index" link>
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
@@ -12,7 +12,7 @@
       </v-list-item>
     </v-list>
     <v-slide-group multiple show-arrows v-else-if="type == 'slide'">
-      <v-slide-item v-for="n in items" :key="n" v-slot="{ active, toggle }">
+      <v-slide-item v-for="(item, index) in items" :key="index" v-slot="{ active, toggle }">
         <v-btn
           class="mx-2"
           :input-value="active"
@@ -21,7 +21,7 @@
           rounded
           @click="toggle"
         >
-          {{ n.text }}
+          {{ item.text }}
         </v-btn>
       </v-slide-item>
     </v-slide-group>

@@ -3,25 +3,23 @@
     <v-img
       class="white--text align-end"
       height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      :src="article.urlToImage"
     >
-      <v-card-title>{{ title }}</v-card-title>
+      <v-card-title>{{ article.title.length > 60 ? article.title.substring(0, 60) + '...': article.title }}</v-card-title>
       <v-btn
         fab
         small
         class="mx-2 card-view-button"
-        @click="$router.push({ name: 'NewsDetail', params: { id: post } })"
+        @click="$router.push({ name: 'NewsDetail', params: { id: article.uuid } })"
       >
         <v-icon>mdi-arrow-right</v-icon>
       </v-btn>
     </v-img>
 
-    <v-card-subtitle class="pb-0"> Number {{ post }} </v-card-subtitle>
+    <v-card-subtitle class="pb-0">{{ article.author }}</v-card-subtitle>
 
     <v-card-text class="text--primary">
-      <div>Whitehaven Beach</div>
-
-      <div>Whitsunday Island, Whitsunday Islands</div>
+      <div>{{ article.description.substring(0, 100) + '...' }}</div>
     </v-card-text>
     <v-btn
       fab
@@ -64,35 +62,40 @@
 
 <script>
 export default {
-  props: ["post"],
+  props: ["article"],
   name: "NewsCard",
   data: () => ({
-    rules: [(v) => v.length <= 30 || "Max 30 characters"],
-    title: "Top 10 Australian beaches",
+    rules: [(v) => v.length <= 100 || "Max 100 characters"],
     newTitle: "",
     reveal: false,
   }),
   methods: {
     edit(action) {
       this.reveal = action == 'open'? true: false
-      if(action == 'open') this.newTitle = this.title
-      if(action == 'save') this.title = this.newTitle
+      if(action == 'open') this.newTitle = this.article.title
+      if(action == 'save') this.article.title = this.newTitle
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.news-card button {
-  &.card-view-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+.news-card {
+  min-height: 320px;
+  .v-card__title {
+    background-color: rgb(152 152 152 / 45%) !important;
   }
-  &.card-edit-button {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+  button {
+    &.card-view-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    &.card-edit-button {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
   }
 }
 .v-card--reveal {

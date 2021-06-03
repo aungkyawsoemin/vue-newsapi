@@ -2,13 +2,14 @@
   <v-container style="padding-top: 5em">
     <v-row>
       <v-col cols="12" lg="6" offset-lg="3">
-        <v-card class="mx-auto">
+        <card-loaders v-if="article == undefined"/>
+        <v-card class="mx-auto" v-else>
           <v-img
             class="white--text align-end"
             height="200px"
-            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            :src="article.urlToImage"
           >
-            <v-card-title>Top 10 Australian beaches</v-card-title>
+            <v-card-title>{{ article.title }}</v-card-title>
             <v-btn
               fab
               small
@@ -27,55 +28,15 @@
             </v-btn>
           </v-img>
 
-          <v-card-subtitle class="pb-0"> Number 1</v-card-subtitle>
+          <v-card-subtitle class="pb-0">{{ article.author }}</v-card-subtitle>
 
           <v-card-text class="text--primary body-1">
             <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-              tenetur non iure odio illum, id magnam similique porro vero ad.
-              Deleniti maxime molestias minus sit, doloribus quo eum officia
-              veniam. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Molestiae tenetur non iure odio illum, id magnam similique porro
-              vero ad. Deleniti maxime molestias minus sit, doloribus quo eum
-              officia veniam. Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Molestiae tenetur non iure odio illum, id magnam similique
-              porro vero ad. Deleniti maxime molestias minus sit, doloribus quo
-              eum officia veniam. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Molestiae tenetur non iure odio illum, id magnam
-              similique porro vero ad. Deleniti maxime molestias minus sit,
-              doloribus quo eum officia veniam.
+              {{ article.description }}
             </div>
 
             <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-              tenetur non iure odio illum, id magnam similique porro vero ad.
-              Deleniti maxime molestias minus sit, doloribus quo eum officia
-              veniam. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Molestiae tenetur non iure odio illum, id magnam similique porro
-              vero ad. Deleniti maxime molestias minus sit, doloribus quo eum
-              officia veniam. Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Molestiae tenetur non iure odio illum, id magnam similique
-              porro vero ad. Deleniti maxime molestias minus sit, doloribus quo
-              eum officia veniam. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Molestiae tenetur non iure odio illum, id magnam
-              similique porro vero ad. Deleniti maxime molestias minus sit,
-              doloribus quo eum officia veniam.
-            </div>
-
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-              tenetur non iure odio illum, id magnam similique porro vero ad.
-              Deleniti maxime molestias minus sit, doloribus quo eum officia
-              veniam. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Molestiae tenetur non iure odio illum, id magnam similique porro
-              vero ad. Deleniti maxime molestias minus sit, doloribus quo eum
-              officia veniam. Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Molestiae tenetur non iure odio illum, id magnam similique
-              porro vero ad. Deleniti maxime molestias minus sit, doloribus quo
-              eum officia veniam. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Molestiae tenetur non iure odio illum, id magnam
-              similique porro vero ad. Deleniti maxime molestias minus sit,
-              doloribus quo eum officia veniam.
+              {{ article.content }}
             </div>
           </v-card-text>
         </v-card>
@@ -85,12 +46,35 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import CardLoaders from '../../components/Loaders/CardLoaders.vue'
+
 export default {
-  //
+  components: { CardLoaders },
+  data: () => ({
+    article: undefined,
+  }),
+  computed: {
+    ...mapState({
+      articles: (state) => state.articles,
+    }),
+  },
+  async mounted() {
+    this.article = await this.getArticleById(this.$route.params.id)
+    console.log(this.article)
+  },
+  methods: {
+    ...mapActions({
+      getArticleById: 'getArticleById'
+    })
+  }
 }
 </script>
 
 <style scoped>
+.v-card__title {
+  background-color: rgb(152 152 152 / 45%) !important;
+}
 .card-back-button {
   position: absolute;
   top: 10px;
