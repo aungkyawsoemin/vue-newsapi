@@ -15,6 +15,11 @@ const routes = [
     name: 'Search',
     component: () => import('../views/Search.vue')
   },
+  {
+    path: '/news/:id',
+    name: 'NewsDetail',
+    component: () => import('../views/News/detail.vue')
+  },
 ]
 
 const router = new VueRouter({

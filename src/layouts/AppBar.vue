@@ -1,7 +1,8 @@
 <template>
   <v-app-bar fixed dense>
     <v-toolbar-title
-      style="padding: 0; cursor: pointer"
+      style="padding: 0"
+      aria-controls
       @click="$router.push({ name: 'Home' })"
       >The Daily News</v-toolbar-title
     >
