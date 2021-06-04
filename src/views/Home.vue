@@ -50,6 +50,11 @@ export default {
       }
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if(vm.$store.getters.keyword !== '') vm.$store.dispatch("resetKeyword")
+    })
+  },
   mounted() {
     if(this.articles.length == 0) this.$store.dispatch('loadArticles')
     if(this.agencies.length == 0) this.$store.dispatch('loadAgencies')

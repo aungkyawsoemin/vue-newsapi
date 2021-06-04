@@ -2,12 +2,12 @@
   <v-sheet class="mx-auto">
     <v-list dense v-if="type == 'list'" style="height: 85vh;overflow: auto;">
       <v-list-item-group
-        v-model="selectedItem"
         color="primary"
       >
         <v-list-item
           v-for="(item, i) in agencies"
           :key="i"
+          :class="{'v-list-item--active': item.id == sourceId}"
           @click="choseSource(item.id)"
         >
           <v-list-item-content>

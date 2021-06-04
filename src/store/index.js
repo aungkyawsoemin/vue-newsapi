@@ -24,10 +24,13 @@ export default new Vuex.Store({
     SET_SOURCE_ID(state, name) {
       state.sourceId = name;
     },
+    SET_KEYWORD(state, keyword) {
+      state.keyword = keyword;
+    },
   },
   actions: {
     loadArticles({state, commit}) {
-      axios.get(`https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}`).then(result => {
+      axios.get(`https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}&q=${state.keyword}`).then(result => {
         commit('SAVE_ARTICLES', result.data.articles);
       }).catch(error => {
         throw new Error(`API ${error}`);
@@ -46,10 +49,20 @@ export default new Vuex.Store({
     setSourceId({ commit }, newValue) {
       commit("SET_SOURCE_ID", newValue);
     },
+    setKeyword({ commit }, newValue) {
+      commit("SET_KEYWORD", newValue);
+    },
+    resetKeyword({ commit }) {
+      commit("SET_KEYWORD", '')
+      commit("SAVE_ARTICLES", [])
+    },
   },
   getters: {
     sourceId: (state) => {
       return state.sourceId;
+    },
+    keyword: (state) => {
+      return state.keyword;
     },
   },
   modules: {

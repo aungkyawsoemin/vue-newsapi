@@ -13,7 +13,7 @@
             <v-btn
               fab
               small
-              @click="$router.push({ name: 'Home' })"
+              @click="handleBack({ name: 'Home' })"
               class="mx-2 card-back-button"
             >
               <v-icon>mdi-arrow-left</v-icon>
@@ -52,6 +52,7 @@ import CardLoaders from '../../components/Loaders/CardLoaders.vue'
 export default {
   components: { CardLoaders },
   data: () => ({
+    fromRoute: null,
     article: undefined,
   }),
   computed: {
@@ -61,6 +62,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      vm.fromRoute = from
       vm.article = vm.articles.find(article => article.uuid == vm.$route.params.id)
     })
   },
@@ -70,7 +72,14 @@ export default {
   methods: {
     ...mapActions({
       getArticleById: 'getArticleById'
-    })
+    }),
+    handleBack (fallback) {
+      if (!this.fromRoute.name) {
+        this.$router.push(fallback)
+      } else {
+        this.$router.back()
+      }
+    }
   }
 }
 </script>
