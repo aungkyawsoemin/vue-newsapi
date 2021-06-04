@@ -1,4 +1,3 @@
-
 <template>
   <v-footer
     dark
@@ -31,7 +30,7 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>News API</strong>
+        {{ new Date().getFullYear() }} — <strong>News API</strong> — Power by Vuetify
       </v-card-text>
     </v-card>
     </v-col>

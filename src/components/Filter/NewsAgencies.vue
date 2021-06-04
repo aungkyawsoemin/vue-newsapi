@@ -1,18 +1,14 @@
 <template>
   <v-sheet class="mx-auto">
-    <v-list dense nav v-if="type == 'list'">
-      <v-list-item v-for="(item, index) in items" :key="index" link>
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-
+    <v-list dense nav v-if="type == 'list'" style="height: 85vh;overflow: auto;">
+      <v-list-item v-for="(item, index) in agencies" :key="index" link>
         <v-list-item-content>
-          <v-list-item-title>{{ item.text }}</v-list-item-title>
+          <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
     <v-slide-group multiple show-arrows v-else-if="type == 'slide'">
-      <v-slide-item v-for="(item, index) in items" :key="index" v-slot="{ active, toggle }">
+      <v-slide-item v-for="(item, index) in agencies" :key="index" v-slot="{ active, toggle }">
         <v-btn
           class="mx-2"
           :input-value="active"
@@ -21,7 +17,7 @@
           rounded
           @click="toggle"
         >
-          {{ item.text }}
+          {{ item.name }}
         </v-btn>
       </v-slide-item>
     </v-slide-group>
@@ -31,7 +27,7 @@
 <script>
 export default {
   name: 'FilterAgencies',
-  props: ['type'],
+  props: ['type', 'agencies'],
   data: () => ({
     items: [
       { text: 'Real-Time', icon: 'mdi-clock' },

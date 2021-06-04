@@ -59,8 +59,12 @@ export default {
       articles: (state) => state.articles,
     }),
   },
-  async mounted() {
-    this.article = await this.getArticleById(this.$route.params.id)
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.article = vm.articles.find(article => article.uuid == vm.$route.params.id)
+    })
+  },
+  mounted() {
     console.log(this.article)
   },
   methods: {

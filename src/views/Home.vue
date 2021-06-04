@@ -2,12 +2,12 @@
   <v-container style="padding-top: 5em">
     <v-row class="hidden-lg-and-up">
       <v-col cols="12">
-        <news-agencies type="slide" />
+        <news-agencies :agencies="agencies" type="slide" />
       </v-col>
     </v-row>
     <v-row>
       <v-col lg="2" offset-lg="1" class="d-none d-lg-block">
-        <news-agencies type="list" />
+        <news-agencies :agencies="agencies" type="list" />
       </v-col>
       <v-col lg="8" md="12">
         <v-row>
@@ -39,10 +39,12 @@ export default {
   computed: {
     ...mapState({
       articles: (state) => state.articles,
+      agencies: (state) => state.agencies,
     }),
   },
   mounted() {
-    this.$store.dispatch('loadArticles')
+    if(this.articles.length == 0) this.$store.dispatch('loadArticles')
+    if(this.agencies.length == 0) this.$store.dispatch('loadAgencies')
   }
 }
 </script>
