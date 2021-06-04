@@ -40,7 +40,15 @@ export default {
     ...mapState({
       articles: (state) => state.articles,
       agencies: (state) => state.agencies,
+      sourceId: (state) => state.sourceId,
     }),
+  },
+  watch: {
+    sourceId: {
+      handler(sourceId) {
+        this.$store.dispatch('loadArticles')
+      }
+    }
   },
   mounted() {
     if(this.articles.length == 0) this.$store.dispatch('loadArticles')

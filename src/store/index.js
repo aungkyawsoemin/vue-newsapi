@@ -20,11 +20,14 @@ export default new Vuex.Store({
     },
     SAVE_AGENCIES(state, agencies) {
       state.agencies = agencies.filter(agency => agency.id != null)
-    }
+    },
+    SET_SOURCE_ID(state, name) {
+      state.sourceId = name;
+    },
   },
   actions: {
     loadArticles({state, commit}) {
-      axios.get(`https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}`).then(result => {
+      axios.get(`https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}`).then(result => {
         commit('SAVE_ARTICLES', result.data.articles);
       }).catch(error => {
         throw new Error(`API ${error}`);
@@ -39,6 +42,14 @@ export default new Vuex.Store({
     },
     getArticleById({state}, id) {
       return state.articles.find(article => article.uuid == id)
+    },
+    setSourceId({ commit }, newValue) {
+      commit("SET_SOURCE_ID", newValue);
+    },
+  },
+  getters: {
+    sourceId: (state) => {
+      return state.sourceId;
     },
   },
   modules: {
