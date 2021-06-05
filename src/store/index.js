@@ -14,6 +14,8 @@ export default new Vuex.Store({
     sourceId: '',
     keyword: '',
     darkMode: localStorage.getItem('DarkMode') === null? false: (localStorage.getItem('DarkMode') == 'true'),
+    snackBar: '',
+    debug: localStorage.getItem('DebugMode') === null? false: (localStorage.getItem('DebugMode') == 'true'),
   },
   mutations: {
     SET_DARK_MODE(state, mode) {
@@ -29,13 +31,20 @@ export default new Vuex.Store({
       state.visitedArticles.unshift(article)
     },
     SET_AGENCIES(state, agencies) {
-      state.agencies = agencies.filter(agency => agency.id != null)
+      if(agencies.length > 0) state.agencies = agencies.filter(agency => agency.id != null)
+      else state.agencies = agencies
     },
     SET_SOURCE_ID(state, name) {
       state.sourceId = name
     },
     SET_KEYWORD(state, keyword) {
       state.keyword = keyword
+    },
+    SET_SNACKBAR(state, snackBar) {
+      state.snackBar = snackBar
+    },
+    SET_DEBUG(state, debug) {
+      state.debug = debug
     },
   },
   actions: {
@@ -48,9 +57,13 @@ export default new Vuex.Store({
       });
     },
     loadAgencies({state, commit}) {
-      axios.get(`https://newsapi.org/v2/sources?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}`).then(result => {
+      var sourceAPI = `https://newsapi.org/v2/sources?apiKey`;
+      if(!state.debug) sourceAPI += `=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}`
+      axios.get(sourceAPI).then(result => {
         commit('SET_AGENCIES', result.data.sources);
       }).catch(error => {
+        commit("SET_SNACKBAR", 'Fetching error in news sources (WRONG API CALL)')
+        commit('SET_AGENCIES', false)
         throw new Error(`API ${error}`)
       });
     },
@@ -68,6 +81,13 @@ export default new Vuex.Store({
       commit("SET_KEYWORD", '')
       commit("SET_ARTICLES", [])
     },
+    setSnackbar({ commit }, newValue) {
+      commit("SET_SNACKBAR", newValue)
+    },
+    setDebug({ commit }, newValue) {
+      localStorage.setItem('DebugMode', newValue)
+      commit("SET_DEBUG", newValue)
+    },
   },
   getters: {
     sourceId: (state) => {
@@ -82,6 +102,9 @@ export default new Vuex.Store({
     getArticleById: state => id => {
 			return state.articles.find(article => article.uuid === id)
 		},
+    snackBar: (state) => {
+      return state.snackBar
+    },
   },
   modules: {
   }

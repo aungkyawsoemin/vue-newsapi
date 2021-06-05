@@ -2,11 +2,22 @@
   <v-container style="padding-top: 5em">
     <v-row class="hidden-lg-and-up">
       <v-col cols="12">
+        <v-progress-linear
+          indeterminate
+          v-if="agencies.length == 0"
+          color="indigo darken-2"
+        ></v-progress-linear>
         <news-agencies :agencies="agencies" type="slide" />
       </v-col>
     </v-row>
     <v-row>
       <v-col lg="2" offset-lg="1" class="d-none d-lg-block">
+        <template v-if="agencies.length == 0">
+          <v-skeleton-loader
+            v-for="n in 9"
+            type="list-item-avatar, divider"
+          ></v-skeleton-loader>
+        </template>
         <news-agencies :agencies="agencies" type="list" />
       </v-col>
       <v-col lg="8" md="12">
