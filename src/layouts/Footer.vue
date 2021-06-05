@@ -30,7 +30,11 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>News API</strong> — Power by Vuetify
+        © {{ new Date().getFullYear() }} — <strong>News API</strong> — developed
+        by
+        <a href="https://aksm.online" target="blank" class="white--text"
+          >aksm</a
+        >
       </v-card-text>
     </v-card>
     </v-col>
@@ -56,6 +60,10 @@ export default {
       {
         link: 'https://www.instagram.com/aung.kyaw.ak/',
         icon: 'mdi-instagram',
+      },
+      {
+        link: 'https://github.com/aungkyawsoemin',
+        icon: 'mdi-github',
       },
     ],
   }),

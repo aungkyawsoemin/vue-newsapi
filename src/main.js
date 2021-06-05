@@ -10,6 +10,10 @@ require('dotenv').config()
 
 Vue.config.productionTip = false
 
+router.afterEach(() => {
+  window.scrollTo(0, 0)
+})
+
 new Vue({
   router,
   store,

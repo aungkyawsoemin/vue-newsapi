@@ -39,6 +39,23 @@
               {{ article.content }}
             </div>
           </v-card-text>
+          <v-card-actions class="pb-5">
+            <v-spacer></v-spacer>
+
+            <template v-for="(item, n) in socialMedia">
+              <v-btn
+                :key="n"
+                :color="item.color"
+                :href="item.url + encodeURI(article.url)"
+                target="blank"
+                class="white--text"
+                fab
+                small
+              >
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-btn>
+            </template>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -54,6 +71,26 @@ export default {
   data: () => ({
     fromRoute: null,
     article: undefined,
+    socialMedia: [
+      {
+        platform: 'facebook',
+        icon: 'mdi-facebook',
+        color: 'blue',
+        url: 'https://www.facebook.com/sharer/sharer.php?u=',
+      },
+      {
+        platform: 'twitter',
+        icon: 'mdi-twitter',
+        color: 'cyan',
+        url: 'https://twitter.com/intent/tweet?text=',
+      },
+      {
+        platform: 'linkedin',
+        icon: 'mdi-linkedin',
+        color: 'indigo',
+        url: 'https://www.linkedin.com/shareArticle?mini=true&url=',
+      },
+    ],
   }),
   beforeRouteEnter(to, from, next) {
     next((vm) => {

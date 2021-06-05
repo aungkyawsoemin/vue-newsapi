@@ -4,7 +4,7 @@
       style="padding: 0"
       aria-controls
       @click="$router.push({ name: 'Home' })"
-      >The Daily News</v-toolbar-title
+      ><span>NEWS</span><span> API</span></v-toolbar-title
     >
 
     <v-spacer></v-spacer>
@@ -46,3 +46,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-toolbar__title {
+  border: 2px solid;
+  padding: 0 15px !important;
+}
+</style>
