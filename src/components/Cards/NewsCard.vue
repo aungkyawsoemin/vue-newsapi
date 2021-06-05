@@ -42,6 +42,7 @@
           <v-textarea
             counter
             label="Title"
+            :maxlength="maxLength"
             :rules="rules"
             v-model="newTitle"
           ></v-textarea>
@@ -51,7 +52,7 @@
           <v-btn text color="teal accent-4" @click="edit('cancel')">
             Cancel
           </v-btn>
-          <v-btn text color="teal accent-4" @click="edit('save')">
+          <v-btn text color="teal accent-4" :disabled="newTitle.length > maxLength" @click="edit('save')">
             Save
           </v-btn>
         </v-card-actions>
@@ -65,6 +66,7 @@ export default {
   props: ["article"],
   name: "NewsCard",
   data: () => ({
+    maxLength: 100,
     rules: [(v) => v.length <= 100 || "Max 100 characters"],
     newTitle: "",
     reveal: false,
