@@ -4,6 +4,7 @@
       <template v-if="agencies.length == 0">
         <v-skeleton-loader
           v-for="n in 9"
+          :key="n"
           type="list-item-avatar, divider"
         ></v-skeleton-loader>
       </template>
