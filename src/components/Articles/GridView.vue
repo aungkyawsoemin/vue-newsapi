@@ -35,7 +35,7 @@
 <script>
 import NewsCard from '../Cards/NewsCard.vue'
 import CardLoaders from '../Loaders/CardLoaders.vue'
-import DefaultAlert from '../Alerts/Default.vue'
+import DefaultAlert from '../Alerts/Basic.vue'
 
 export default {
   props: ['articles'],

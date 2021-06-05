@@ -30,7 +30,7 @@
 <script>
 import { mapState } from 'vuex'
 import NewsCard from '../components/Cards/NewsCard.vue'
-import DefaultAlert from '../components/Alerts/Default.vue'
+import DefaultAlert from '../components/Alerts/Basic.vue'
 
 export default {
   name: 'Home',

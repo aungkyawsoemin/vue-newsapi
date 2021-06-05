@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import DefaultAlert from '../Alerts/Default.vue'
+import DefaultAlert from '../Alerts/Basic.vue'
 
 export default {
   name: 'FilterAgencies',
