@@ -13,6 +13,10 @@
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
+    <v-btn icon @click="$router.push({ name: 'VisitedNews' })">
+      <v-icon>mdi-history</v-icon>
+    </v-btn>
+
     <v-btn icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
       <v-icon v-if="$vuetify.theme.dark">mdi-weather-sunny</v-icon>
       <v-icon v-else>mdi-weather-night</v-icon>

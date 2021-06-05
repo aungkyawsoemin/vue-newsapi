@@ -6,7 +6,7 @@
         <v-card class="mx-auto" v-else>
           <v-img
             class="white--text align-end"
-            height="200px"
+            min-height="200px"
             :src="article.urlToImage"
           >
             <v-card-title>{{ article.title }}</v-card-title>
@@ -55,19 +55,16 @@ export default {
     fromRoute: null,
     article: undefined,
   }),
-  computed: {
-    ...mapState({
-      articles: (state) => state.articles,
-    }),
-  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.fromRoute = from
-      vm.article = vm.articles.find(article => article.uuid == vm.$route.params.id)
+      vm.article = vm.$store.getters.getArticleById(vm.$route.params.id)
+      if(vm.article != undefined) vm.$store.commit('SET_VISITED_ARTICLES', vm.article)
     })
   },
-  mounted() {
-    console.log(this.article)
+  updated() {
+    console.log("this.$store.state.visitedArticles")
+    console.log(this.$store.state.visitedArticles)
   },
   methods: {
     ...mapActions({
