@@ -22,8 +22,10 @@ export default new Vuex.Store({
       state.darkMode = mode
     },
     SET_ARTICLES(state, articles) {
-      state.articles = articles.map(v => ({...v, uuid: uuid.v1()}))
-      state.articles = state.articles.filter(article => article.description != null && article.urlToImage != null)
+      if(articles.length > 0) {
+        state.articles = articles.map(v => ({...v, uuid: uuid.v1()}))
+        state.articles = state.articles.filter(article => article.description != null && article.urlToImage != null)
+      } else state.articles = articles
     },
     SET_VISITED_ARTICLES(state, article) {
       //Last In Last Out - History view
@@ -51,7 +53,10 @@ export default new Vuex.Store({
     loadArticles({state, commit}) {
       state.articles = []
       axios.get(`https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}&q=${state.keyword}`).then(result => {
-        commit('SET_ARTICLES', result.data.articles);
+        commit('SET_ARTICLES', result.data.articles)
+        if(result.data.articles.length === 0) {
+          commit('SET_ARTICLES', false)
+        } else commit('SET_ARTICLES', result.data.articles)
       }).catch(error => {
         throw new Error(`API ${error}`)
       });
@@ -60,7 +65,9 @@ export default new Vuex.Store({
       var sourceAPI = `https://newsapi.org/v2/sources?apiKey`;
       if(!state.debug) sourceAPI += `=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}`
       axios.get(sourceAPI).then(result => {
-        commit('SET_AGENCIES', result.data.sources);
+        if(result.data.sources.length === 0) {
+          commit('SET_AGENCIES', false)
+        } else commit('SET_AGENCIES', result.data.sources)
       }).catch(error => {
         commit("SET_SNACKBAR", 'Fetching error in news sources (WRONG API CALL)')
         commit('SET_AGENCIES', false)
@@ -75,6 +82,7 @@ export default new Vuex.Store({
       commit("SET_SOURCE_ID", newValue)
     },
     setKeyword({ commit }, newValue) {
+      if(newValue == null || newValue == undefined) newValue = ''
       commit("SET_KEYWORD", newValue)
     },
     resetKeyword({ commit }) {

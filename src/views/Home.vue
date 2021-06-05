@@ -2,50 +2,30 @@
   <v-container style="padding-top: 5em">
     <v-row class="hidden-lg-and-up">
       <v-col cols="12">
-        <v-progress-linear
-          indeterminate
-          v-if="agencies.length == 0"
-          color="indigo darken-2"
-        ></v-progress-linear>
         <news-agencies :agencies="agencies" type="slide" />
       </v-col>
     </v-row>
     <v-row>
       <v-col lg="2" offset-lg="1" class="d-none d-lg-block">
-        <template v-if="agencies.length == 0">
-          <v-skeleton-loader
-            v-for="n in 9"
-            type="list-item-avatar, divider"
-          ></v-skeleton-loader>
-        </template>
         <news-agencies :agencies="agencies" type="list" />
       </v-col>
       <v-col lg="8" md="12">
-        <v-row>
-          <v-col v-for="n in 9" v-show="articles.length == 0" :key="n" cols="12" lg="4" md="4" sm="6" xs="12">
-            <card-loaders />
-          </v-col>
-          <v-col v-for="item in articles" v-show="articles.length != 0" :key="item.uuid" lg="4" md="4" sm="6" xs="12">
-            <news-card :article="item" />
-          </v-col>
-        </v-row>
+        <article-grid-view :articles="articles" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import NewsCard from '../components/Cards/NewsCard.vue'
 import NewsAgencies from '../components/Filter/NewsAgencies.vue'
-import CardLoaders from '../components/Loaders/CardLoaders.vue'
 import { mapState } from 'vuex'
+import ArticleGridView from '../components/Articles/GridView.vue'
 
 export default {
   name: 'Home',
   components: {
-    NewsCard,
     NewsAgencies,
-    CardLoaders,
+    ArticleGridView,
   },
   computed: {
     ...mapState({
