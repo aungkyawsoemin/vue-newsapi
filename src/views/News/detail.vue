@@ -2,7 +2,7 @@
   <v-container style="padding-top: 5em">
     <v-row>
       <v-col cols="12" lg="6" offset-lg="3">
-        <card-loaders v-if="article == undefined"/>
+        <card-loaders v-if="article === undefined"/>
         <v-card class="mx-auto" v-else>
           <v-img
             class="white--text align-end"
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import CardLoaders from '../../components/Loaders/CardLoaders.vue'
 
 export default {
@@ -55,25 +55,25 @@ export default {
     fromRoute: null,
     article: undefined,
   }),
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
       vm.fromRoute = from
       vm.article = vm.$store.getters.getArticleById(vm.$route.params.id)
-      if(vm.article != undefined) vm.$store.commit('SET_VISITED_ARTICLES', vm.article)
+      if (vm.article !== undefined) vm.$store.commit('SET_VISITED_ARTICLES', vm.article)
     })
   },
   methods: {
     ...mapActions({
-      getArticleById: 'getArticleById'
+      getArticleById: 'getArticleById',
     }),
-    handleBack (fallback) {
+    handleBack(fallback) {
       if (!this.fromRoute.name) {
         this.$router.push(fallback)
       } else {
         this.$router.back()
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

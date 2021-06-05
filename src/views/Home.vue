@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import NewsAgencies from '../components/Filter/NewsAgencies.vue'
 import { mapState } from 'vuex'
+import NewsAgencies from '../components/Filter/NewsAgencies.vue'
 import ArticleGridView from '../components/Articles/GridView.vue'
 
 export default {
@@ -36,19 +36,19 @@ export default {
   },
   watch: {
     sourceId: {
-      handler(sourceId) {
+      handler() {
         this.$store.dispatch('loadArticles')
-      }
-    }
+      },
+    },
   },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      if(vm.$store.getters.keyword !== '') vm.$store.dispatch("resetKeyword")
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (vm.$store.getters.keyword !== '') vm.$store.dispatch('resetKeyword')
     })
   },
   mounted() {
-    if(this.articles.length == 0) this.$store.dispatch('loadArticles')
-    if(this.agencies.length == 0) this.$store.dispatch('loadAgencies')
-  }
+    if (this.articles.length === 0) this.$store.dispatch('loadArticles')
+    if (this.agencies.length === 0) this.$store.dispatch('loadAgencies')
+  },
 }
 </script>

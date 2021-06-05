@@ -5,12 +5,18 @@
       height="200px"
       :src="article.urlToImage"
     >
-      <v-card-title>{{ article.title.length > 60 ? article.title.substring(0, 60) + '...': article.title }}</v-card-title>
+      <v-card-title>{{
+        article.title.length > 60
+          ? article.title.substring(0, 60) + "..."
+          : article.title
+      }}</v-card-title>
       <v-btn
         fab
         small
         class="mx-2 card-view-button"
-        @click="$router.push({ name: 'NewsDetail', params: { id: article.uuid } })"
+        @click="
+          $router.push({ name: 'NewsDetail', params: { id: article.uuid } })
+        "
       >
         <v-icon>mdi-arrow-right</v-icon>
       </v-btn>
@@ -19,7 +25,7 @@
     <v-card-subtitle class="pb-0">{{ article.author }}</v-card-subtitle>
 
     <v-card-text class="text--primary">
-      <div>{{ article.description.substring(0, 100) + '...' }}</div>
+      <div>{{ article.description.substring(0, 100) + "..." }}</div>
     </v-card-text>
     <v-btn
       fab
@@ -52,7 +58,12 @@
           <v-btn text color="teal accent-4" @click="edit('cancel')">
             Cancel
           </v-btn>
-          <v-btn text color="teal accent-4" :disabled="newTitle.length > maxLength" @click="edit('save')">
+          <v-btn
+            text
+            color="teal accent-4"
+            :disabled="newTitle.length > maxLength"
+            @click="edit('save')"
+          >
             Save
           </v-btn>
         </v-card-actions>
@@ -63,21 +74,21 @@
 
 <script>
 export default {
-  props: ["article"],
-  name: "NewsCard",
+  props: ['article'],
+  name: 'NewsCard',
   data: () => ({
     maxLength: 100,
-    rules: [(v) => v.length <= 100 || "Max 100 characters"],
-    newTitle: "",
+    rules: [(v) => v.length <= 100 || 'Max 100 characters'],
+    newTitle: '',
     reveal: false,
   }),
   methods: {
     edit(action) {
-      this.reveal = action == 'open'? true: false
-      if(action == 'open') this.newTitle = this.article.title
-      if(action == 'save') this.article.title = this.newTitle
-    }
-  }
+      this.reveal = action === 'open'
+      if (action === 'open') this.newTitle = this.article.title
+      if (action === 'save') this.article.title = this.newTitle
+    },
+  },
 }
 </script>
 

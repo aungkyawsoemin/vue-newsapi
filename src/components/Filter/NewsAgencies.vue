@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="mx-auto">
-    <template v-if="type == 'list'">
-      <template v-if="agencies.length == 0">
+    <template v-if="type === 'list'">
+      <template v-if="agencies.length === 0">
         <v-skeleton-loader
           v-for="n in 9"
           :key="n"
@@ -18,7 +18,7 @@
           <v-list-item
             v-for="(item, i) in agencies"
             :key="i"
-            :class="{ 'v-list-item--active': item.id == sourceId }"
+            :class="{ 'v-list-item--active': item.id === sourceId }"
             @click="choseSource(item.id)"
           >
             <v-list-item-content>
@@ -28,10 +28,10 @@
         </v-list-item-group>
       </v-list>
     </template>
-    <template v-else-if="type == 'slide'">
+    <template v-else-if="type === 'slide'">
       <v-progress-linear
         indeterminate
-        v-if="agencies.length == 0"
+        v-if="agencies.length === 0"
         color="indigo darken-2"
       ></v-progress-linear>
       <default-alert
@@ -49,7 +49,7 @@
           <v-btn
             class="mx-2"
             :class="{
-              'v-slide-item--active indigo white--text': item.id == sourceId,
+              'v-slide-item--active indigo white--text': item.id === sourceId,
             }"
             depressed
             rounded
@@ -64,46 +64,46 @@
 </template>
 
 <script>
-import DefaultAlert from "../Alerts/Default.vue"
+import DefaultAlert from '../Alerts/Default.vue'
 
 export default {
-  name: "FilterAgencies",
+  name: 'FilterAgencies',
   components: {
     DefaultAlert,
   },
-  props: ["type", "agencies"],
+  props: ['type', 'agencies'],
   data: () => ({
     selectedItem: 1,
     items: [
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" },
+      { text: 'Real-Time', icon: 'mdi-clock' },
+      { text: 'Audience', icon: 'mdi-account' },
+      { text: 'Conversions', icon: 'mdi-flag' },
+      { text: 'Real-Time', icon: 'mdi-clock' },
+      { text: 'Audience', icon: 'mdi-account' },
+      { text: 'Conversions', icon: 'mdi-flag' },
+      { text: 'Real-Time', icon: 'mdi-clock' },
+      { text: 'Audience', icon: 'mdi-account' },
+      { text: 'Conversions', icon: 'mdi-flag' },
+      { text: 'Real-Time', icon: 'mdi-clock' },
+      { text: 'Audience', icon: 'mdi-account' },
+      { text: 'Conversions', icon: 'mdi-flag' },
     ],
   }),
   computed: {
     sourceId: {
       get() {
-        return this.$store.getters.sourceId;
+        return this.$store.getters.sourceId
       },
       set(newValue) {
-        return this.$store.dispatch("setSourceId", newValue);
+        return this.$store.dispatch('setSourceId', newValue)
       },
     },
   },
   methods: {
     choseSource(source) {
-      if (this.sourceId === source) this.sourceId = "";
-      else this.sourceId = source;
+      if (this.sourceId === source) this.sourceId = ''
+      else this.sourceId = source
     },
   },
-};
+}
 </script>

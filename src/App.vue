@@ -68,36 +68,36 @@ export default {
         return this.$store.getters.darkMode
       },
       set(newValue) {
-        return this.$store.dispatch("setDarkMode", newValue)
-      }
+        return this.$store.dispatch('setDarkMode', newValue)
+      },
     },
     snackBar: {
       get() {
         return this.$store.getters.snackBar
       },
       set(newValue) {
-        return this.$store.dispatch("setSnackbar", newValue)
-      }
+        return this.$store.dispatch('setSnackbar', newValue)
+      },
     },
     debug: {
       get() {
         return this.$store.state.debug
       },
       set(newValue) {
-        return this.$store.dispatch("setDebug", newValue)
-      }
+        return this.$store.dispatch('setDebug', newValue)
+      },
     },
   },
   mounted() {
-    if(!this.debug) this.snackBar = 'Click <i class="v-icon mdi mdi-play-circle"></i> to test WRONG API CALL'
+    if (!this.debug) this.snackBar = 'Click <i class="v-icon mdi mdi-play-circle"></i> to test WRONG API CALL'
     this.$vuetify.theme.dark = this.darkMode
   },
   methods: {
     debugMode() {
       this.debug = !this.debug
-      window.location.href='/'
-    }
-  }
+      window.location.href = '/'
+    },
+  },
 }
 </script>
 

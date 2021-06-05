@@ -1,13 +1,13 @@
 module.exports = {
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config
       .plugin('html')
-      .tap(args => {
-        args[0].title = "News API";
-        return args;
+      .tap((args) => {
+        args[0].title = 'News API'
+        return args
       })
   },
   transpileDependencies: [
-    'vuetify'
-  ]
+    'vuetify',
+  ],
 }

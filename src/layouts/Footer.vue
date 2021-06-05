@@ -38,26 +38,26 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      socialMedia: [
-          {
-            link: 'https://www.facebook.com/mgaungkyawsoemin',
-            icon: 'mdi-facebook',
-          },
-          {
-            link: 'https://twitter.com/AungKyawSoeMin',
-            icon: 'mdi-twitter',
-          },
-          {
-            link: 'https://www.linkedin.com/in/aungkyaw-soemin/',
-            icon: 'mdi-linkedin',
-          },
-          {
-            link: 'https://www.instagram.com/aung.kyaw.ak/',
-            icon: 'mdi-instagram',
-          }
-      ],
-    }),
-  }
+export default {
+  data: () => ({
+    socialMedia: [
+      {
+        link: 'https://www.facebook.com/mgaungkyawsoemin',
+        icon: 'mdi-facebook',
+      },
+      {
+        link: 'https://twitter.com/AungKyawSoeMin',
+        icon: 'mdi-twitter',
+      },
+      {
+        link: 'https://www.linkedin.com/in/aungkyaw-soemin/',
+        icon: 'mdi-linkedin',
+      },
+      {
+        link: 'https://www.instagram.com/aung.kyaw.ak/',
+        icon: 'mdi-instagram',
+      },
+    ],
+  }),
+}
 </script>

@@ -3,8 +3,12 @@
     <v-row>
       <v-col lg="8" offset-lg="2" md="12">
         <v-row>
-          <v-col v-show="visitedArticles.length == 0" cols="12">
-            <default-alert description="There are no recently viewed articles" btnLink="Home" btnText="READ ARTICLES" />
+          <v-col v-show="visitedArticles.length === 0" cols="12">
+            <default-alert
+              description="There are no recently viewed articles"
+              btnLink="Home"
+              btnText="READ ARTICLES"
+            />
           </v-col>
           <v-col
             v-for="item in visitedArticles"
@@ -24,12 +28,12 @@
 </template>
 
 <script>
-import NewsCard from "../components/Cards/NewsCard.vue"
-import DefaultAlert from "../components/Alerts/Default.vue"
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
+import NewsCard from '../components/Cards/NewsCard.vue'
+import DefaultAlert from '../components/Alerts/Default.vue'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     NewsCard,
     DefaultAlert,
@@ -41,8 +45,8 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      if (vm.$store.getters.keyword !== "") vm.$store.dispatch("resetKeyword");
-    });
+      if (vm.$store.getters.keyword !== '') vm.$store.dispatch('resetKeyword')
+    })
   },
-};
+}
 </script>

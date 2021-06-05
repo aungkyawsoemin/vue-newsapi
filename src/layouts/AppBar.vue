@@ -32,9 +32,9 @@ export default {
         return this.$store.getters.darkMode
       },
       set(newValue) {
-        return this.$store.dispatch("setDarkMode", newValue)
-      }
+        return this.$store.dispatch('setDarkMode', newValue)
+      },
     },
-  }
+  },
 }
 </script>

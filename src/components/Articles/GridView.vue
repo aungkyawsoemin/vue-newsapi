@@ -2,7 +2,7 @@
   <v-row>
     <v-col
       v-for="n in 9"
-      v-show="articles.length == 0"
+      v-show="articles.length === 0"
       :key="n"
       cols="12"
       lg="4"
@@ -35,7 +35,7 @@
 <script>
 import NewsCard from '../Cards/NewsCard.vue'
 import CardLoaders from '../Loaders/CardLoaders.vue'
-import DefaultAlert from "../Alerts/Default.vue"
+import DefaultAlert from '../Alerts/Default.vue'
 
 export default {
   props: ['articles'],
@@ -44,5 +44,5 @@ export default {
     CardLoaders,
     DefaultAlert,
   },
-};
+}
 </script>

@@ -27,9 +27,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import NewsAgencies from '../components/Filter/NewsAgencies.vue'
 import ArticleGridView from '../components/Articles/GridView.vue'
-import { mapState } from 'vuex'
 
 export default {
   name: 'Search',
@@ -48,25 +48,25 @@ export default {
         return this.$store.getters.keyword
       },
       set(newValue) {
-        return this.$store.dispatch("setKeyword", newValue)
-      }
+        return this.$store.dispatch('setKeyword', newValue)
+      },
     },
   },
   watch: {
     sourceId: {
-      handler(sourceId) {
+      handler() {
         this.$store.dispatch('loadArticles')
-      }
+      },
     },
     keyword: {
-      handler(keyword) {
+      handler() {
         this.$store.dispatch('loadArticles')
-      }
-    }
+      },
+    },
   },
   mounted() {
-    if(this.articles.length == 0) this.$store.dispatch('loadArticles')
-    if(this.agencies.length == 0) this.$store.dispatch('loadAgencies')
-  }
+    if (this.articles.length === 0) this.$store.dispatch('loadArticles')
+    if (this.agencies.length === 0) this.$store.dispatch('loadAgencies')
+  },
 }
 </script>
