@@ -9,6 +9,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="keyword"
+              ref="keyword"
               label="Search article here"
               outlined
               clearable
@@ -36,6 +37,9 @@ export default {
     NewsAgencies,
     ArticleGridView,
   },
+  data: () => ({
+    timer: null,
+  }),
   computed: {
     ...mapState({
       articles: (state) => state.articles,
@@ -54,17 +58,25 @@ export default {
   watch: {
     sourceId: {
       handler() {
-        this.$store.dispatch('loadArticles')
+        this.$store.dispatch('loadArticles', 'search')
       },
     },
     keyword: {
       handler() {
-        this.$store.dispatch('loadArticles')
+        // delay for user's typing then trigger search
+        if (this.timer) {
+          clearTimeout(this.timer)
+          this.timer = null
+        }
+        this.timer = setTimeout(() => {
+          this.$store.dispatch('loadArticles', 'search')
+        }, 800)
       },
     },
   },
   mounted() {
-    if (this.articles.length === 0) this.$store.dispatch('loadArticles')
+    this.$refs.keyword.focus()
+    if (this.articles.length === 0) this.$store.dispatch('loadArticles', 'search')
     if (this.agencies.length === 0) this.$store.dispatch('loadAgencies')
   },
 }

@@ -9,7 +9,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn icon @click="$router.push({ name: 'Search' })">
+    <v-btn icon @click="keyword = '';$router.push({ name: 'Search' })">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
@@ -33,6 +33,14 @@ export default {
       },
       set(newValue) {
         return this.$store.dispatch('setDarkMode', newValue)
+      },
+    },
+    keyword: {
+      get() {
+        return this.$store.getters.keyword
+      },
+      set(newValue) {
+        return this.$store.dispatch('setKeyword', newValue)
       },
     },
   },

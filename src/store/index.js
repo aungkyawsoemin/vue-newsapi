@@ -64,10 +64,12 @@ export default new Vuex.Store({
     loadArticles({
       state,
       commit,
-    }) {
+    }, type = 'default') {
+      let headlinesAPI = `https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}`
       state.articles = []
+      if (type === 'search') headlinesAPI += `&q=${state.keyword}`
       axios.get(
-        `https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}&q=${state.keyword}`,
+        headlinesAPI,
       ).then((result) => {
         if (result.data.articles.length === 0) {
           commit('SET_ARTICLES', false)
@@ -90,7 +92,7 @@ export default new Vuex.Store({
           commit('SET_AGENCIES', false)
         } else commit('SET_AGENCIES', result.data.sources)
       }).catch((error) => {
-        commit('SET_SNACKBAR', 'Fetching error in news sources (WRONG API CALL)')
+        commit('SET_SNACKBAR', `API ${error}`)
         commit('SET_AGENCIES', false)
         throw new Error(`API ${error}`)
       })
@@ -134,7 +136,11 @@ export default new Vuex.Store({
     sourceId: (state) => state.sourceId,
     keyword: (state) => state.keyword,
     darkMode: (state) => state.darkMode,
-    getArticleById: (state) => (id) => state.articles.find((article) => article.uuid === id),
+    getArticleById: (state) => (id) => {
+      let temp = state.articles.find((article) => article.uuid === id)
+      if (temp === undefined) temp = state.visitedArticles.find((article) => article.uuid === id)
+      return temp
+    },
     snackBar: (state) => state.snackBar,
   },
   modules: {},

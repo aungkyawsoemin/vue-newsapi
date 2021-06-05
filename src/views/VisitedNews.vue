@@ -42,10 +42,5 @@ export default {
       visitedArticles: (state) => state.visitedArticles,
     }),
   },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      if (vm.$store.getters.keyword !== '') vm.$store.dispatch('resetKeyword')
-    })
-  },
 }
 </script>

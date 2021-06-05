@@ -1,6 +1,7 @@
 <template>
   <v-sheet class="mx-auto">
     <template v-if="type === 'list'">
+      <v-subheader class="subtitle-1">SOURCES</v-subheader>
       <template v-if="agencies.length === 0">
         <v-skeleton-loader
           v-for="n in 9"
@@ -99,5 +100,6 @@ export default {
 }
 .active-list {
   background: #3f51b5 !important;
+  color: white !important;
 }
 </style>

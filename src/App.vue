@@ -2,9 +2,7 @@
   <v-app>
     <app-bar/>
     <v-main>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <router-view></router-view>
     </v-main>
     <app-footer/>
 
