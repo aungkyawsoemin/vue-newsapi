@@ -20,5 +20,10 @@ npm run build
 npm run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Project time tracking
+
+![image](https://user-images.githubusercontent.com/13193516/120894263-929d0200-c63d-11eb-942e-db40c05a89c0.png)
+
+![image](https://user-images.githubusercontent.com/13193516/120894421-44d4c980-c63e-11eb-9091-458a7f6d7cbc.png)
+
+
