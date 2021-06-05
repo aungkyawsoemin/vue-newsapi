@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
 
 // NavigationDuplicated Console Error
 const originalPush = VueRouter.prototype.push
@@ -19,17 +19,17 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import('../views/Search.vue'),
+    component: () => import('@/views/Search.vue'),
   },
   {
     path: '/visited-news',
     name: 'VisitedNews',
-    component: () => import('../views/VisitedNews.vue'),
+    component: () => import('@/views/VisitedNews.vue'),
   },
   {
     path: '/news/:id',
     name: 'NewsDetail',
-    component: () => import('../views/News/detail.vue'),
+    component: () => import('@/views/News/detail.vue'),
   },
 ]
 

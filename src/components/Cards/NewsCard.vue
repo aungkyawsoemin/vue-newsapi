@@ -75,7 +75,6 @@
 <script>
 export default {
   props: ['article'],
-  name: 'NewsCard',
   data: () => ({
     maxLength: 100,
     rules: [(v) => v.length <= 100 || 'Max 100 characters'],

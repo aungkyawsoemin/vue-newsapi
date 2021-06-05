@@ -47,7 +47,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import CardLoaders from '../../components/Loaders/CardLoaders.vue'
+import CardLoaders from '@/components/Loaders/CardLoaders.vue'
 
 export default {
   components: { CardLoaders },

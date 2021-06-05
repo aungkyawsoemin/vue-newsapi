@@ -14,11 +14,11 @@
         alertType="warning"
       />
       <v-list dense style="height: 85vh; overflow: auto">
-        <v-list-item-group color="primary">
+        <v-list-item-group>
           <v-list-item
             v-for="(item, i) in agencies"
             :key="i"
-            :class="{ 'v-list-item--active': item.id === sourceId }"
+            :class="{ 'active-list': item.id === sourceId }"
             @click="choseSource(item.id)"
           >
             <v-list-item-content>
@@ -64,30 +64,15 @@
 </template>
 
 <script>
-import DefaultAlert from '../Alerts/Basic.vue'
+import DefaultAlert from '@/components/Alerts/Basic.vue'
 
 export default {
-  name: 'FilterAgencies',
   components: {
     DefaultAlert,
   },
   props: ['type', 'agencies'],
   data: () => ({
     selectedItem: 1,
-    items: [
-      { text: 'Real-Time', icon: 'mdi-clock' },
-      { text: 'Audience', icon: 'mdi-account' },
-      { text: 'Conversions', icon: 'mdi-flag' },
-      { text: 'Real-Time', icon: 'mdi-clock' },
-      { text: 'Audience', icon: 'mdi-account' },
-      { text: 'Conversions', icon: 'mdi-flag' },
-      { text: 'Real-Time', icon: 'mdi-clock' },
-      { text: 'Audience', icon: 'mdi-account' },
-      { text: 'Conversions', icon: 'mdi-flag' },
-      { text: 'Real-Time', icon: 'mdi-clock' },
-      { text: 'Audience', icon: 'mdi-account' },
-      { text: 'Conversions', icon: 'mdi-flag' },
-    ],
   }),
   computed: {
     sourceId: {
@@ -107,3 +92,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-list-item--active::before {
+  background: unset !important;
+}
+.active-list {
+  background: #3f51b5 !important;
+}
+</style>

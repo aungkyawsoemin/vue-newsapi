@@ -28,11 +28,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import NewsAgencies from '../components/Filter/NewsAgencies.vue'
-import ArticleGridView from '../components/Articles/GridView.vue'
+import NewsAgencies from '@/components/Filter/NewsAgencies.vue'
+import ArticleGridView from '@/layouts/Articles/GridView.vue'
 
 export default {
-  name: 'Search',
   components: {
     NewsAgencies,
     ArticleGridView,

@@ -69,7 +69,6 @@ export default new Vuex.Store({
       axios.get(
         `https://newsapi.org/v2/top-headlines?apiKey=${process.env.VUE_APP_NEWSAPI_KEY}&language=${state.language}&sources=${state.sourceId}&q=${state.keyword}`,
       ).then((result) => {
-        commit('SET_ARTICLES', result.data.articles)
         if (result.data.articles.length === 0) {
           commit('SET_ARTICLES', false)
         } else commit('SET_ARTICLES', result.data.articles)

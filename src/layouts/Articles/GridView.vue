@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import NewsCard from '../Cards/NewsCard.vue'
-import CardLoaders from '../Loaders/CardLoaders.vue'
-import DefaultAlert from '../Alerts/Basic.vue'
+import NewsCard from '@/components/Cards/NewsCard.vue'
+import CardLoaders from '@/components/Loaders/CardLoaders.vue'
+import DefaultAlert from '@/components/Alerts/Basic.vue'
 
 export default {
   props: ['articles'],
