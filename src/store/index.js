@@ -13,8 +13,12 @@ export default new Vuex.Store({
     language: 'en',
     sourceId: '',
     keyword: '',
+    darkMode: localStorage.getItem('DarkMode') === null? false: (localStorage.getItem('DarkMode') == 'true'),
   },
   mutations: {
+    SET_DARK_MODE(state, mode) {
+      state.darkMode = mode
+    },
     SET_ARTICLES(state, articles) {
       state.articles = articles.map(v => ({...v, uuid: uuid.v1()}))
       state.articles = state.articles.filter(article => article.description != null && article.urlToImage != null)
@@ -50,6 +54,10 @@ export default new Vuex.Store({
         throw new Error(`API ${error}`)
       });
     },
+    setDarkMode({ commit }, newValue) {
+      localStorage.setItem('DarkMode', newValue)
+      commit("SET_DARK_MODE", newValue)
+    },
     setSourceId({ commit }, newValue) {
       commit("SET_SOURCE_ID", newValue)
     },
@@ -67,6 +75,9 @@ export default new Vuex.Store({
     },
     keyword: (state) => {
       return state.keyword
+    },
+    darkMode: (state) => {
+      return state.darkMode
     },
     getArticleById: state => id => {
 			return state.articles.find(article => article.uuid === id)

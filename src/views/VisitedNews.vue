@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import NewsCard from '../components/Cards/NewsCard.vue' 
+import NewsCard from '../components/Cards/NewsCard.vue'
 import { mapState } from 'vuex'
 
 export default {

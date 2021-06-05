@@ -22,5 +22,18 @@ export default {
       default: () => ({}),
     },
   },
+  computed: {
+    darkMode: {
+      get() {
+        return this.$store.getters.darkMode
+      },
+      set(newValue) {
+        return this.$store.dispatch("setDarkMode", newValue)
+      }
+    },
+  },
+  mounted() {
+    this.$vuetify.theme.dark = this.darkMode
+  }
 }
 </script>

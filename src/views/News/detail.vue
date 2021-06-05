@@ -62,10 +62,6 @@ export default {
       if(vm.article != undefined) vm.$store.commit('SET_VISITED_ARTICLES', vm.article)
     })
   },
-  updated() {
-    console.log("this.$store.state.visitedArticles")
-    console.log(this.$store.state.visitedArticles)
-  },
   methods: {
     ...mapActions({
       getArticleById: 'getArticleById'
