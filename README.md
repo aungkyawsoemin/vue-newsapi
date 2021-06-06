@@ -1,8 +1,13 @@
-# vue-newsapi
+# vue-newsapi by Aung Kyaw Soe Min
 
 ## Project setup
 ```
 npm install
+```
+
+### Setup .env variables then assign API_KEY. You can generate new API_KEY [here](https://newsapi.org/register)
+```
+cp .env.example .env
 ```
 
 ### Compiles and hot-reloads for development
@@ -10,20 +15,9 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Project time tracking by [Wakatime](https://wakatime.com/about)
 
-### Run your unit tests
-```
-npm run test:unit
-```
+![image](https://user-images.githubusercontent.com/13193516/120934029-aec69f00-c722-11eb-94be-49f448a81c42.png)
 
-### Project time tracking
-
-![image](https://user-images.githubusercontent.com/13193516/120894263-929d0200-c63d-11eb-942e-db40c05a89c0.png)
-
-![image](https://user-images.githubusercontent.com/13193516/120894421-44d4c980-c63e-11eb-9091-458a7f6d7cbc.png)
-
+![image](https://user-images.githubusercontent.com/13193516/120934639-30b7c780-c725-11eb-957b-f2a442d8477a.png)
 
