@@ -19,7 +19,7 @@
           <v-list-item
             v-for="(item, i) in agencies"
             :key="i"
-            :class="{ 'active-list': item.id === sourceId }"
+            :class="{ 'active-list white--text': item.id === sourceId }"
             @click="choseSource(item.id)"
           >
             <v-list-item-content>
